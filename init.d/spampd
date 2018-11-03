@@ -1,3 +1,4 @@
+#!/sbin/openrc-run
 command="/usr/bin/spampd"
 pidfile="/run/${RC_SVCNAME}.pid"
 command_args="-p=$pidfile
