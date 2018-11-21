@@ -1,5 +1,5 @@
 #!/sbin/openrc-run
-command="/usr/bin/spampd"
+command=spampd
 pidfile="/run/${RC_SVCNAME}.pid"
 command_args="-p=$pidfile
     ${user:+-u=$user} ${group:+-g=$group}
