@@ -1,0 +1,25 @@
+#!/sbin/openrc-run
+supervisor=supervise-daemon
+healthcheck_timer=15
+respawn_period=300
+
+: "${USER:=${RC_SVCNAME#*.}}"
+: "${WEECHAT_HOME:=$(grep ^$USER /etc/passwd | cut -d : -f 6)/.weechat}"
+: "${WEECHAT_FIFO:=$WEECHAT_HOME/weechat_fifo}"
+
+name=weechat
+command=weechat-headless
+command_args="-d $WEECHAT_HOME"
+pidfile="/run/$RC_SVCNAME.pid"
+
+user="$USER"
+
+healthcheck() {
+    test -p $WEECHAT_FIFO || return 1
+    dir="$(mktemp -d)"
+    echo "*/exec -bg touch $dir/$RC_SVCNAME.state" > $WEECHAT_FIFO
+    test -f "$dir/$RC_SVCNAME.state"
+    ret=$?
+    rm -rf "$dir"
+    return $ret
+}
