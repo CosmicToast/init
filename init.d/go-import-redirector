@@ -1,0 +1,12 @@
+#!/sbin/openrc-run
+supervisor=supervise-daemon
+healthcheck_timer=30
+
+name='Go Import Redirector'
+command='go-import-redirector'
+command_args="$from $to"
+
+healthcheck() {
+    [ -x /usr/bin/curl ] || return 0
+    /usr/bin/curl -q "$from"
+}
