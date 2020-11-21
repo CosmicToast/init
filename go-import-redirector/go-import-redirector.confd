@@ -1,0 +1,4 @@
+# set addr to override automatic detection, useful for single deployments
+addr=:http
+from='example.com/x/*'
+to='https://gitlab.com/example/*'

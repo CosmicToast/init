@@ -1,0 +1,14 @@
+#!/sbin/openrc-run
+supervisor=supervise-daemon
+respawn_max=0
+
+_base="${RC_SVCNAME%%:*}"
+_sub="${RC_SVCNAME##$_base}"
+
+: "${addr:=$_sub}"
+: "${addr:=:http}"
+
+name='Go Import Redirector'
+command='go-import-redirector'
+command_args="-addr=$addr $from $to"
+command_user=nobody:nobody
