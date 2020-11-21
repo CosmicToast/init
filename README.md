@@ -1,15 +1,21 @@
 Toast's Init Scripts
 ====================
 
-I have, at some point, written a "service"-type file for every init system type out there (systemd, upstart, some variant of sysv, openrc and runit, to be specific).
-For most of them (systemd, runit, openrc), I try and learn the correct way of "doing things".
-As a result, I end up in shock over some... less well-composed scripts distributed with some distributions.
-When that happens, I replace them!
-This repository will contain various scripts I write/modify from now on.
+Various convenience init scripts, organized by-service.
+Each service directory may contain a README with additional information.
+Most of these will be optimized to use with the bin bucket (see my binbuilder repository).
 
-### Directory Structure
+In general, though:
 
-- `init.d`: openrc initscripts
-- `conf.d`: openrc default configuration files
-- `systemd`: systemd units
-- `runit`: runit `./run` files
+## OpenRC
+Scripts will be named `$NAME.initd` and `$NAME.confd`.
+They should go into `/etc/init.d/$NAME` and `/etc/conf.d/$NAME` respectively.
+`$NAME` will generally be just the service name.
+Some init scripts can be linked to `$NAME.$var`. This will usually be mentioned.
+These scripts will use the regular (non-pathed) binary name. Feel free to modify them to point to an absolute location.
+
+## Systemd
+Scripts will be named `$NAME.service`.
+Sometimes, a `$NAME2.timer` may accompany them if appropriate.
+All of these should go either in `/etc/systemd/system`, `/etc/systemd/user` or `~/.config/systemd/user` directories (depending). Assume the first unless otherwise specified.
+Sometimes, they will use an external configuration file. In this case, it will generally be mentioned.
