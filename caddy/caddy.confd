@@ -1,0 +1,17 @@
+# you do not need this file! this file is here to show some examples of things you can customize
+
+# override the storage location for configuration and data storage
+directory=/var/lib/caddy
+
+# change the admin API location to use for healthchecks
+healthcheck_location=localhost:2020
+
+# disable healthchecks
+healthcheck_location=''
+
+# set custom options
+caddy_opts='--config /etc/caddy/Caddyfile'
+
+# create log files for stdout and stderr
+output_log=/var/log/caddy.out
+error_log=/var/log/caddy.err

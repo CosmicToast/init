@@ -1,0 +1,67 @@
+#!/sbin/openrc-run
+supervisor=supervise-daemon
+
+# allow setting .whatever for multiple instances, $RC_SVCNAME defaults to caddy -> /etc/caddy/Caddyfile
+: ${directory=/etc/$RC_SVCNAME}
+: ${caddy_opts:=--config "$directory"/Caddyfile}
+: ${health_location=localhost:2019}
+
+export HOME="$directory/home"
+export XDG_DATA_HOME="$HOME/data" XDG_CONFIG_HOME="$HOME/config"
+
+name='Caddy Web Server'
+command='caddy'
+description='An extensible server platform that uses TLS by default'
+
+# empty caddy_opts will use directory-adjacent Caddyfile
+command_args="run $caddy_opts"
+command_user='caddy:caddy'
+
+extra_commands='checkconfig'
+describe_checkconfig='Check configuration validity'
+extra_started_commands='reload'
+describe_reload='Reload configuration without downtime'
+
+depend() {
+	need net localmount
+	after firewall
+}
+
+checkconfig() {
+	ebegin "Checking configuration for $RC_SVCNAME"
+	"$command" validate $caddy_opts
+	eend $?
+}
+
+reload() {
+	checkconfig || return $?
+	ebegin "Reloading $RC_SVCNAME"
+	"$command" reload $caddy_opts
+	eend $?
+}
+
+start_pre() {
+	checkpath -d "$HOME" -o $command_user -m 700
+	if [ "$RC_CMD" != restart ]; then
+		checkconfig || return $?
+	fi
+}
+
+stop_pre() {
+	if [ "$RC_CMD" == restart ]; then
+		checkconfig || return $?
+	fi
+}
+
+# WARNING: depends on the API endpoint being available
+# set to '' explicitly to disable
+healthcheck() {
+	[ -z "$health_location" ] && return 0
+	_curl="$(which curl 2>&1)"
+
+	if [ -x "$_curl" ]; then
+		"$_curl" -qf "$health_location"
+		return $?
+	fi
+	return 0
+}
