@@ -1,6 +1,0 @@
-# change based on your setup, these are the recommended defaults
-pleroma_prefix=/opt/pleroma
-pleroma_port=4000
-
-# uncomment to enable health checks (ensure the option is enabled in pleroma)
-#pleroma_health=1
