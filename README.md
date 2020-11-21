@@ -14,6 +14,10 @@ They should go into `/etc/init.d/$NAME` and `/etc/conf.d/$NAME` respectively.
 Some init scripts can be linked to `$NAME.$var`. This will usually be mentioned.
 These scripts will use the regular (non-pathed) binary name. Feel free to modify them to point to an absolute location.
 
+Recommended command to create a system group and user using add{group,user}:
+`addgroup -S $name && adduser -h $dir -s /sbin/nologin -G $name -S $name`
+Where `$name` is the name of the `user:group` and `dir` is the home directory.
+
 ## Systemd
 Scripts will be named `$NAME.service`.
 Sometimes, a `$NAME2.timer` may accompany them if appropriate.
