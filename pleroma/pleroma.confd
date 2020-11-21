@@ -1,0 +1,12 @@
+# you do not need this file! this file is here to show some examples of things you can customize
+
+# override where the OTP release is installed
+#directory=/var/lib/pleroma
+
+# enable healthchecks by giving the host and port pleroma is listening on
+# note that this requires the health check endpoint option to be enabled
+#health_host=localhost:4000
+
+# create log files for stdout and stderr
+output_log=/var/log/pleroma.out
+error_log=/var/log/pleroma.err

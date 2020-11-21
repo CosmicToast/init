@@ -1,0 +1,30 @@
+#!/sbin/openrc-run
+supervisor=supervise-daemon
+healthcheck_delay=60
+healthcheck_timer=30
+respawn_delay=5
+respawn_max=0
+
+: ${directory:=/opt/pleroma}
+# health_host should default to localhost:4000
+
+name='Pleroma Server'
+command="$directory/bin/pleroma"
+command_args=start
+command_user=pleroma:pleroma
+
+depend() {
+    use postgresql
+}
+
+healthcheck() {
+	[ -z "$health_host" ] && return 0
+	health_location="$health_host"/api/pleroma/healthcheck
+	_curl="$(which curl 2>&1)"
+
+	if [ -x "$_curl" ]; then
+		"$_curl" -qf "$health_location"
+		return $?
+	fi
+	return 0
+}
