@@ -4,6 +4,7 @@ Toast's Init Scripts
 Various convenience init scripts, organized by-service.
 Each service directory may contain a README with additional information.
 Most of these will be optimized to use with the bin bucket (see my binbuilder repository).
+All of them pre-assume you already have the static binary (or non-static service) installed.
 
 In general, though:
 
