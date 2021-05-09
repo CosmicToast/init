@@ -2,8 +2,8 @@
 command_user='rsync:rsync'
 
 # log to file
-output_log=/var/log/rsync.out
-error_log=/var/log/rsync.err
+output_log="/var/log/$RC_SVCNAME.out"
+error_log="/var/log/$RC_SVCNAME.err"
 
 # alternate configuration file
 cfgfile=/etc/rsyncd.conf

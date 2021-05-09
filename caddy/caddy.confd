@@ -2,8 +2,8 @@
 command_user='caddy:caddy'
 
 # log to file
-output_log=/var/log/caddy.out
-error_log=/var/log/caddy.err
+output_log="/var/log/$RC_SVCNAME.out"
+error_log="/var/log/$RC_SVCNAME.err"
 
 # storage location, default based on service symlink
 directory=/var/lib/caddy

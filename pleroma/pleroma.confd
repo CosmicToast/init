@@ -2,8 +2,8 @@
 command_user=pleroma:pleroma
 
 # log to file
-output_log=/var/log/pleroma.out
-error_log=/var/log/pleroma.err
+output_log="/var/log/$RC_SVCNAME.out"
+error_log="/var/log/$RC_SVCNAME.err"
 
 # override where the OTP release is installed
 directory=/var/lib/pleroma
