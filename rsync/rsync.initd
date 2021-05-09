@@ -1,0 +1,8 @@
+#!/sbin/openrc-run
+supervisor=supervise-daemon
+: ${cfgfile:=/etc/$RC_SVCNAME.conf}
+
+command=rsync
+command_args="--daemon --no-detach --config=$cfgfile
+	$command_args"
+required_files="$cfgfile"
