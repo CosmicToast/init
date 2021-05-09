@@ -1,5 +1,3 @@
-# you do not need this file! this file is here to show some examples of things you can customize
-
 # run as non-root
 command_user='caddy:caddy'
 
