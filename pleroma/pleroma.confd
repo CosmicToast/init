@@ -1,12 +1,14 @@
-# you do not need this file! this file is here to show some examples of things you can customize
+# run as non-root
+command_user=pleroma:pleroma
+
+# log to file
+output_log=/var/log/caddy.out
+error_log=/var/log/caddy.err
 
 # override where the OTP release is installed
-#directory=/var/lib/pleroma
+directory=/var/lib/pleroma
 
-# enable healthchecks by giving the host and port pleroma is listening on
-# note that this requires the health check endpoint option to be enabled
-#health_host=localhost:4000
-
-# create log files for stdout and stderr
-output_log=/var/log/pleroma.out
-error_log=/var/log/pleroma.err
+# enable healthchecks
+healthcheck() {
+	curl -qf localhost:4000/api/pleroma/healthcheck
+}
