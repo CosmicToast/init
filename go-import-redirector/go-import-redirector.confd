@@ -1,4 +1,15 @@
+# this file is *required*
+# all of the non-required options are commented
+
+# run as non-root
+#command_user=nobody:nobody
+
+# log to file
+#output_log="/var/log/$RC_SVCNAME.out"
+#error_log="/var/log/$RC_SVCNAME.err"
+
 # set addr to override automatic detection, useful for single deployments
-addr=:http
+#addr=:http
+
 from='example.com/x/*'
 to='https://gitlab.com/example/*'

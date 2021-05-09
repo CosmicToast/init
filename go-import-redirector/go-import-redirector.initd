@@ -11,4 +11,3 @@ _sub="${RC_SVCNAME##$_base}"
 name='Go Import Redirector'
 command='go-import-redirector'
 command_args="-addr=$addr $from $to"
-command_user=nobody:nobody
